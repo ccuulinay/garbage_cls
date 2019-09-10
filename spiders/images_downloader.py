@@ -96,7 +96,7 @@ def google_download_target_images(image_url, image_format, save_file_prefix, sav
         try:
             raw_img = res.content
             count = len(list(save_p.glob(str(save_file_name)+"*"))) + 1
-            if image_format:
+            if not image_format:
                 save_suffix = "jpg"
             else:
                 save_suffix = image_format
@@ -104,7 +104,7 @@ def google_download_target_images(image_url, image_format, save_file_prefix, sav
             file_path = save_p / str(str(save_file_prefix) + "_" + str(count) + "." + save_suffix)
             with open(file_path, "wb") as f:
                 f.write(raw_img)
-            time.sleep(1)
+            time.sleep(0.6)
         except Exception as e:
             logging.warning("Exception as {}".format(e))
         
@@ -112,12 +112,18 @@ def google_download_target_images(image_url, image_format, save_file_prefix, sav
         raise Exception("Error when download image.")
 
 
-for i in lv_names:
+count = 0
+sleep_interval = 10
+for i in lv_names[:]:
     query_sample = i[-1]
     save_file_name = "_".join(i)
     target_images = google_target_images(query_sample)
     logging.warning(len(target_images))
-    for image_url, image_format in target_images:
+    for image_url, image_format in target_images[:]:
         google_download_target_images(image_url, image_format, save_file_name, save_path="../data")
-        # time.sleep(1)
+        # Counter number of request, sleep 5 seconds every 50 requests.
+        count += 1
+        if count % sleep_interval == 0:
+            time.sleep(3)
+
 
