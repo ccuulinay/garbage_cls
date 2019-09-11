@@ -1,0 +1,12 @@
+# To run the spider.
+```bash
+cd <where_u_like>/garbage_classification/spiders
+python images_downloader.py
+```
+- If you don't need the proxy for accessing required network, comment below block from the code.
+```python
+proxy = "socks5h://127.0.0.1:1080"
+
+os.environ['http_proxy'] = proxy 
+os.environ['https_proxy'] = proxy
+```
