@@ -89,7 +89,7 @@ def google_download_target_images(image_url, image_format, save_file_prefix, sav
     if res.status_code == 200:
         try:
             raw_img = res.content
-            count = len(list(save_p.glob(str(save_file_name)+"*"))) + 1
+            count = len(list(save_p.glob(str(save_file_prefix)+"*"))) + 1
             if not image_format:
                 save_suffix = "jpg"
             else:
@@ -105,7 +105,36 @@ def google_download_target_images(image_url, image_format, save_file_prefix, sav
     else:
         raise Exception("Error when download image.")
 
-## Below begin to work.
+
+def _proceed_download(lv, start_image, max_end_image, except_temp_file, save_path):
+    count = 0
+    query_sample = lv[-1]
+    save_file_name = "_".join(lv)
+    target_images = google_target_images(query_sample)
+    logging.warning(query_sample)
+    logging.warning(len(target_images))
+    temp_end_image = min(max_end_image, len(target_images))
+    for image_url, image_format in target_images[start_image:temp_end_image]:
+        try:
+            google_download_target_images(image_url, image_format, save_file_name, save_path=save_path)
+        except:
+            with open(except_temp_file, "w") as f:
+                f.write(save_file_name)
+                current_num = len(glob.glob(save_path+"/"+save_file_name+"*"))
+                f.write("\n")
+                f.write(str(current_num))
+        # Counter number of request, sleep few seconds every few requests.
+        count += 1
+        if count % sleep_interval == 0:
+            time.sleep(3)
+    with open(except_temp_file, "w") as f:
+        f.write(save_file_name)
+        current_num = len(glob.glob(save_path+"/"+save_file_name+"*"))
+        f.write("\n")
+        f.write(str(current_num))
+
+
+# Below begin to work.
 
 
 lv_names = []
