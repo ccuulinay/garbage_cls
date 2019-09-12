@@ -60,9 +60,8 @@ def levelx_processing(level_cat, cur_pattern=None, samples=[]):
         return samples
 
 
-
-
 def google_target_images(query_kw):
+    logging.warning(query_kw)
     google_image_url = google_search_base_url+quote(str(query_kw).encode('utf8'))+google_image_tail
     res = requests.get(google_image_url, headers=headers)
     if res.status_code == 200:
@@ -133,15 +132,15 @@ if os.path.exists(except_temp_file):
 count = 0
 sleep_interval = 10
 
-if last_level_index and int(lasttime_download_num) >= 80:
+if last_level_index and int(lasttime_download_num) >= 59:
     start_level = last_level_index + 1
 
 end_level = len(lv_names) + 1
 
 start_image = 0
-max_end_image = 100
+max_end_image = 60
 
-if last_level_index and int(lasttime_download_num) < 80:
+if last_level_index and int(lasttime_download_num) < 59:
     i = lv_names[last_level_index]
     query_sample = i[-1]
     save_file_name = "_".join(i)
