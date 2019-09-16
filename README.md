@@ -6,6 +6,7 @@ A project to build everything around garbage classification advisor.
 Updates
 - A python eatable catalog for Shanghai garbage classification rules, from guidebook.
 - An image scraper to collect training data for ongoing work.
+- A notebook for EDA.
 
 ---
 
@@ -18,4 +19,4 @@ Todo
 
 Done
 - Completed collecting data from google.
-
+- Done cleansing suffixes of image data files.
