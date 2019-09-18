@@ -20,4 +20,4 @@ Todo
 
 Done
 - Completed collecting data from google.
-
+- Done cleansing suffixes of image data files.
