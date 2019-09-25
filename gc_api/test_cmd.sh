@@ -1,0 +1,1 @@
+curl -X POST "http://localhost:40086/api/v1/ayi/garbage_image" -H "accept: application/json" -F "image_file=@../data/湿垃圾_食材废料_米_45.jpeg"
