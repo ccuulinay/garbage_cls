@@ -5,7 +5,7 @@
 
 import os
 
-proxy = "socks5h://127.0.0.1:1080"
+proxy = "socks5h://127.0.0.1:1081"
 
 os.environ['http_proxy'] = proxy 
 os.environ['https_proxy'] = proxy
@@ -108,13 +108,16 @@ def google_download_target_images(image_url, image_format, save_file_prefix, sav
 
 def _proceed_download(lv, start_image, max_end_image, except_temp_file, save_path):
     count = 0
+    sleep_interval = 10
     query_sample = lv[-1]
     save_file_name = "_".join(lv)
     target_images = google_target_images(query_sample)
     logging.warning(query_sample)
     logging.warning(len(target_images))
     temp_end_image = min(max_end_image, len(target_images))
-    for image_url, image_format in target_images[start_image:temp_end_image]:
+    current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
+    temp_start_image = max(start_image, current_num+1)
+    for image_url, image_format in target_images[temp_start_image:temp_end_image]:
         try:
             google_download_target_images(image_url, image_format, save_file_name, save_path=save_path)
         except:
@@ -136,88 +139,91 @@ def _proceed_download(lv, start_image, max_end_image, except_temp_file, save_pat
 
 # Below begin to work.
 
+def ops():
+    lv_names = []
+    for i in SH_GARBAGE_CLS_CAT:
+        x = levelx_processing(i)
+        if x:
+            lv_names.extend(x)
 
-lv_names = []
-for i in SH_GARBAGE_CLS_CAT:
-    x = levelx_processing(i)
-    if x:
-        lv_names.extend(x)
 
 
+    save_path = "../data"
+    except_temp_file = "./batch_temp_state.ind"
 
-save_path = "../data"
-except_temp_file = "./temp_state.ind"
+    if os.path.exists(except_temp_file):
+        with open(except_temp_file, "r") as f:
+            lasttime_save_file_name = f.readline()
+            lasttime_download_num = f.readline()
 
-if os.path.exists(except_temp_file):
-    with open(except_temp_file, "r") as f:
-        lasttime_save_file_name = f.readline()
-        lasttime_download_num = f.readline()
+        last_level = lasttime_save_file_name.replace("\n", "").split("_")
+        last_level_index = lv_names.index(last_level)
 
-    last_level = lasttime_save_file_name.replace("\n", "").split("_")
-    last_level_index = lv_names.index(last_level)
+        print(last_level_index)
 
-    print(last_level_index)
+    count = 0
+    sleep_interval = 10
 
-count = 0
-sleep_interval = 10
+    if last_level_index and int(lasttime_download_num) >= 59:
+        start_level = last_level_index + 1
 
-if last_level_index and int(lasttime_download_num) >= 59:
-    start_level = last_level_index + 1
+    end_level = len(lv_names) + 1
 
-end_level = len(lv_names) + 1
+    start_image = 0
+    max_end_image = 60
 
-start_image = 0
-max_end_image = 60
+    if last_level_index and int(lasttime_download_num) < 59:
+        i = lv_names[last_level_index]
+        query_sample = i[-1]
+        save_file_name = "_".join(i)
+        target_images = google_target_images(query_sample)
+        temp_end_image = min(max_end_image, len(target_images))
+        for image_url, image_format in target_images[int(lasttime_download_num):temp_end_image]:
+            try:
+                google_download_target_images(image_url, image_format, save_file_name, save_path=save_path)
+            except:
+                with open(except_temp_file, "w") as f:
+                    f.write(save_file_name)
+                    current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
+                    f.write("\n")
+                    f.write(str(current_num))
+            # Counter number of request, sleep few seconds every few requests.
+            count += 1
+            if count % sleep_interval == 0:
+                time.sleep(3)
+        with open(except_temp_file, "w") as f:
+            f.write(save_file_name)
+            current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
+            f.write("\n")
+            f.write(str(current_num))
 
-if last_level_index and int(lasttime_download_num) < 59:
-    i = lv_names[last_level_index]
-    query_sample = i[-1]
-    save_file_name = "_".join(i)
-    target_images = google_target_images(query_sample)
-    temp_end_image = min(max_end_image, len(target_images))
-    for image_url, image_format in target_images[int(lasttime_download_num):temp_end_image]:
-        try:
-            google_download_target_images(image_url, image_format, save_file_name, save_path=save_path)
-        except:
-            with open(except_temp_file, "w") as f:
-                f.write(save_file_name)
-                current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
-                f.write("\n")
-                f.write(str(current_num))
-        # Counter number of request, sleep few seconds every few requests.
-        count += 1
-        if count % sleep_interval == 0:
-            time.sleep(3)
-    with open(except_temp_file, "w") as f:
-        f.write(save_file_name)
-        current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
-        f.write("\n")
-        f.write(str(current_num))
+        start_level = last_level_index + 1
 
-    start_level = last_level_index + 1
+    for i in lv_names[start_level:end_level]:
+        query_sample = i[-1]
+        save_file_name = "_".join(i)
+        target_images = google_target_images(query_sample)
+        logging.warning(len(target_images))
+        temp_end_image = min(max_end_image, len(target_images))
+        for image_url, image_format in target_images[start_image:temp_end_image]:
+            try:
+                google_download_target_images(image_url, image_format, save_file_name, save_path=save_path)
+            except:
+                with open(except_temp_file, "w") as f:
+                    f.write(save_file_name)
+                    current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
+                    f.write("\n")
+                    f.write(str(current_num))
+            # Counter number of request, sleep few seconds every few requests.
+            count += 1
+            if count % sleep_interval == 0:
+                time.sleep(3)
+        with open(except_temp_file, "w") as f:
+            f.write(save_file_name)
+            current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
+            f.write("\n")
+            f.write(str(current_num))
 
-for i in lv_names[start_level:end_level]:
-    query_sample = i[-1]
-    save_file_name = "_".join(i)
-    target_images = google_target_images(query_sample)
-    logging.warning(len(target_images))
-    temp_end_image = min(max_end_image, len(target_images))
-    for image_url, image_format in target_images[start_image:temp_end_image]:
-        try:
-            google_download_target_images(image_url, image_format, save_file_name, save_path=save_path)
-        except:
-            with open(except_temp_file, "w") as f:
-                f.write(save_file_name)
-                current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
-                f.write("\n")
-                f.write(str(current_num))
-        # Counter number of request, sleep few seconds every few requests.
-        count += 1
-        if count % sleep_interval == 0:
-            time.sleep(3)
-    with open(except_temp_file, "w") as f:
-        f.write(save_file_name)
-        current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
-        f.write("\n")
-        f.write(str(current_num))
 
+if __name__ == "__main__":
+    ops()
