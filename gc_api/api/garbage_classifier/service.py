@@ -2,7 +2,7 @@ import tensorflow as tf
 import os
 import time
 from api import logger, application
-from api.common.constants import level0_label_encoding_dict, MODEL_IMAGE_SIZE
+from api.common.constants import MODEL_LABELS_DICT, MODEL_IMAGE_SIZE
 
 IMAGE_SIZE = MODEL_IMAGE_SIZE
 
@@ -42,4 +42,4 @@ def get_predition(image):
     image_X = preprocess_imagefile(image)
     image_X = tf.expand_dims(image_X, axis=0)
     pred_Y =  garbage_cls.predict(image_X)
-    return level0_label_encoding_dict[pred_Y.argmax()]
+    return MODEL_LABELS_DICT[pred_Y.argmax()]

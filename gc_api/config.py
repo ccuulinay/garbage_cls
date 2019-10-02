@@ -1,5 +1,6 @@
 import os
 import logging
+import json
 from datetime import timedelta
 
 
@@ -8,7 +9,13 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'ccuulinay')
     UPLOAD_FOLDER = os.path.join(APP_ROOT, "images")
     MODEL_FOLDER = os.path.join(APP_ROOT, "..", "models")
-    MODEL_PATH = os.path.join(MODEL_FOLDER, "epoch_40_adam_without_drop_out.h5")
+    # Load model and it's params in config file which from saving from training.
+    MODEL_CONF_FILE = os.path.join(MODEL_FOLDER, "model_label_dict.conf")
+    with open(MODEL_CONF_FILE, 'r') as f:
+        _models_params = json.loads(f.read())
+    MODEL_BASENAME = "_inceptionV3_epoch_30_without_dropout_level0"
+    MODEL_PARAM = _models_params[MODEL_BASENAME]
+    MODEL_PATH = os.path.join(MODEL_FOLDER, MODEL_PARAM['model_name'])
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     
 

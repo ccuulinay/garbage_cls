@@ -1,3 +1,4 @@
-level0_label_encoding_dict = {0: '可回收物', 2: '有害垃圾', 3: '湿垃圾', 1: '干垃圾'}
+from api import application
 
-MODEL_IMAGE_SIZE = 299
+MODEL_LABELS_DICT = {int(k): v for k,v in application.config['MODEL_PARAM']['label_dict'].items()}
+MODEL_IMAGE_SIZE = application.config['MODEL_PARAM']['IMAGE_SIZE']
