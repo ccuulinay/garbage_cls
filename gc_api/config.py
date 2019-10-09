@@ -13,10 +13,12 @@ class Config(object):
     MODEL_CONF_FILE = os.path.join(MODEL_FOLDER, "model_label_dict.conf")
     with open(MODEL_CONF_FILE, 'r') as f:
         _models_params = json.loads(f.read())
-    MODEL_BASENAME = "_inceptionV3_epoch_30_without_dropout_level0"
+    # MODEL_BASENAME = "_inceptionV3_epoch_30_without_dropout_level0"
+    MODEL_BASENAME = "_mobilenetV2_epoch_30_without_dropout_level0"
     MODEL_PARAM = _models_params[MODEL_BASENAME]
     MODEL_PATH = os.path.join(MODEL_FOLDER, MODEL_PARAM['model_name'])
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    KEEP_UPLOAD_IMAGE = False
     
 
 class Development(Config):
