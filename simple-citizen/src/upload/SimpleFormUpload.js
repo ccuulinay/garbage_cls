@@ -73,7 +73,7 @@ class SimpleFormUpload extends React.Component {
     }
         
     async uploadFile(file){
-
+        console.log(file)
         const formData = new FormData();
         
         formData.append('image_file',file)
