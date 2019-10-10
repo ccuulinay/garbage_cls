@@ -38,23 +38,8 @@ class SupervisorAyiService(object):
     def ayi_comment(self, uploaded_image):
         image_to_comment = self.preprocess(uploaded_image)
         comment = self.predict(image_to_comment)
+        logger.debug(comment)
         return image_to_comment, {"comment": comment}
 
-    def ayi_comment_capture(self, args):
-        image_str = args['image_string']
-        image_file = base64.b64decode(image_str)
-        # logger.debug(image_file)
-        ext = "jpeg"
-        
-        save_filename = str(uuid.uuid4()) + "." + ext
-        destination = application.config['UPLOAD_FOLDER']
-        if not os.path.exists(destination):
-            os.makedirs(destination)
-        with open(os.path.join(destination, save_filename), "wb") as f:
-            f.write(image_file)
-        
-        image_to_comment = os.path.join(application.config['UPLOAD_FOLDER'], save_filename)
-
-        comment = self.predict(image_to_comment)
-        return image_to_comment, {"comment": comment}
+    
     

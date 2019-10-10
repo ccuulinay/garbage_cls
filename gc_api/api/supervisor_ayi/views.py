@@ -29,7 +29,18 @@ class SupervisorAyiOperations(Resource):
             # return redirect(request.url)
             return {'Message': "No file selected"}
         if uploaded and self.validate_imagefile(uploaded.filename):
-            response = supervisor_ayi_service.ayi_comment(uploaded)
+            temp_image, response = supervisor_ayi_service.ayi_comment(uploaded)
+
+            @after_this_request
+            def after_request_func(res):
+                if application.config['KEEP_UPLOAD_IMAGE']:
+                    pass
+                else:
+                    logger.debug("Remove temp image file.")
+                    if os.path.exists(temp_image):
+                        os.remove(temp_image)
+                return res
+            
             return response
 
     @staticmethod
