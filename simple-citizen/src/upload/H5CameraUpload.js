@@ -4,7 +4,8 @@ import axios from 'axios';
 import 'react-html5-camera-photo/build/css/index.css';
  
 class H5CameraUpload extends Component {
-    UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/camera_capture';
+    //UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/camera_capture';
+    UPLOAD_ENDPOINT = '/api/v1/ayi/camera_capture';
     constructor(props) {
         super(props);
         this.state ={
@@ -82,7 +83,7 @@ class H5CameraUpload extends Component {
                 imageType = {IMAGE_TYPES.JPG}
                 imageCompression = {0.97}
                 isMaxResolution = {false}
-                //isImageMirror = {false}
+                isImageMirror = {false}
                 //isSilentMode = {true}
                 //isDisplayStartCameraError = {true}
                 //isFullscreen = {true}

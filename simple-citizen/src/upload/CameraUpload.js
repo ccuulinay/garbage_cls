@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import axios from 'axios';
 
 class CameraUpload extends React.Component {
-    UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/camera_capture';
+    UPLOAD_ENDPOINT = '/api/v1/ayi/camera_capture';
     constructor(props) {
         super(props);
         this.state ={
