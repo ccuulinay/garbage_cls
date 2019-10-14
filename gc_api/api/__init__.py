@@ -7,7 +7,8 @@ from flask_restplus import Api
 application = Flask(__name__, template_folder="../static", static_folder="../static/static")
 
 # Load configuration from config object which default to Development
-application.config.from_object(os.getenv('FLASK_ENVIRONMENT', 'config.Development'))
+# application.config.from_object(os.getenv('FLASK_ENVIRONMENT', 'config.Development'))
+application.config.from_object(os.getenv('FLASK_ENVIRONMENT', 'config.Production'))
 
 # CORS handling
 CORS(application)

@@ -17,4 +17,4 @@ api.init_app(application)
 load_model()
 
 if __name__ == "__main__":
-    application.run(host="0.0.0.0", port=40086, debug=True)
+    application.run(host="0.0.0.0", port=40086, debug=application.config['DEBUG'])
