@@ -12,7 +12,7 @@ A project to build everything around garbage classification advisor.
     └── spiders                 # Data collector for collecting images of garbages.
 
 ---
-## Demo  
+## Demo
 Browser may prompt warning saying this site is not secure, you can click "Advanced" and proceed to visit the site.    
 https://122.51.49.45
 ---
