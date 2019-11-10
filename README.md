@@ -15,6 +15,8 @@ A project to build everything around garbage classification advisor.
 ## Demo
 Browser may prompt warning saying this site is not secure, you can click "Advanced" and proceed to visit the site.    
 https://122.51.49.45
+
+
 ---
 ## What is it?
 - Currently, the taxonomy is base on Shanghai guideline. 4 kinds of domestic rubbish, which are [可回收物, 有害垃圾, 湿垃圾, 干垃圾]. 
