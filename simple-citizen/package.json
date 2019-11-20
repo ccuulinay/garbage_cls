@@ -8,7 +8,10 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-dropzone": "^10.1.9",
-    "react-scripts": "3.1.2"
+    "react-html5-camera-photo": "^1.4.3",
+    "react-responsive": "^8.0.1",
+    "react-scripts": "3.1.2",
+    "react-webcam": "^3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -8,4 +8,14 @@ upload_parser.add_argument('image_file', location='files'
                            , required=True
                            , help="Image file")
 
+camera_capture_parser = api.parser()
+camera_capture_parser.add_argument(
+    'image_string', type=str
+    , required=True
+    , help="Camera capture image screen"
+)
 
+
+camera_capture = api.model('camera_capture', {
+    "image_string": fields.String(required=True, description="Camera capture base64 image string.")
+})

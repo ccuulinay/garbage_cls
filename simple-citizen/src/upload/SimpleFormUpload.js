@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class SimpleFormUpload extends React.Component {
 
-    UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/garbage_image';
+    UPLOAD_ENDPOINT = '/api/v1/ayi/garbage_image';
     constructor(props) {
         super(props);
         this.state ={
@@ -73,7 +73,7 @@ class SimpleFormUpload extends React.Component {
     }
         
     async uploadFile(file){
-
+        console.log(file)
         const formData = new FormData();
         
         formData.append('image_file',file)

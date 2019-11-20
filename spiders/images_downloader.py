@@ -31,6 +31,37 @@ from config import headers
 # eg: lv0Name_lv1Name_sampleName_, 可回收物_废纸张_报纸
 # DFS.
 
+
+def _unit_parse_cls_cat(_cat):
+    r = []
+    if "zh_name" in _cat.keys():
+        c_name = _cat["zh_name"]
+        r.append([c_name])
+        if "sample" in _cat.keys():
+            if len(_cat["sample"]) == 0:
+                r.append([c_name, "SMLP"])
+            for sample_name in _cat['sample']:
+                r.append([c_name, sample_name, "SMLP"])
+    return r
+
+
+def parse_cls_cats(cats):
+    r_samples = []
+    for cat in cats:
+        c_name = cat['zh_name']
+        parent_list = _unit_parse_cls_cat(cat)
+        r_samples.extend(parent_list)
+        if "sub_class" in cat.keys():
+            sub_classes = cat["sub_class"]
+            _temp_sub_samples = parse_cls_cats(sub_classes)
+
+            sub_samples = [[c_name, *_t] for _t in _temp_sub_samples]
+            r_samples.extend(sub_samples)
+    return r_samples
+
+
+
+
 def levelx_processing(level_cat, cur_pattern=None, samples=[]):
     if cur_pattern:
         cur_pattern = cur_pattern
@@ -41,21 +72,22 @@ def levelx_processing(level_cat, cur_pattern=None, samples=[]):
     # samples = []
     cur_pattern.append(level_name)
     if "sub_class" in level_cat.keys():
-        sub_level = level_cat['sub_class']
-        for sl in sub_level:
+        sub_levels = level_cat['sub_class']
+        for sl in sub_levels:
             temp_cur_pattern = copy.deepcopy(cur_pattern)
             sub_class_samples = levelx_processing(sl, cur_pattern=temp_cur_pattern, samples=samples)
             if sub_class_samples:
                 sub_class_samples_list.extend(sub_class_samples)
         # print(len(sub_class_samples_list))
     if "sample" in level_cat.keys():
-        # print(cur_pattern)
         for sample_name in level_cat['sample']:
             temp_cur_pattern = copy.deepcopy(cur_pattern)
             temp_cur_pattern.append(sample_name)
             # print("-------------{}".format(temp_cur_pattern))
             samples.append(temp_cur_pattern)
         # print(len(samples))
+        if len(level_cat['sample']) == 0:
+            samples.append(cur_pattern)
         samples.extend(sub_class_samples_list)
         return samples
 
@@ -226,4 +258,5 @@ def ops():
 
 
 if __name__ == "__main__":
-    ops()
+    # ops()
+    pass
