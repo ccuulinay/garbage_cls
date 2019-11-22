@@ -13,7 +13,6 @@ os.environ['https_proxy'] = proxy
 
 import requests
 from bs4 import BeautifulSoup
-import pprint
 from urllib.parse import quote
 import json
 import copy
@@ -22,7 +21,7 @@ import logging
 import time
 from pathlib import Path
 
-from spiders.categories import SH_GARBAGE_CLS_CAT
+from category.categories import SH_GARBAGE_CLS_CAT
 from config import google_search_base_url, google_image_tail
 from config import headers
 

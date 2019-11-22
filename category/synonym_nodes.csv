@@ -1,0 +1,27 @@
+矿泉水瓶, 塑料瓶, is_synonym_of
+旧书本, 书本, is_synonym_of
+旧报纸, 报纸, is_synonym_of
+包装纸, 纸塑铝复合包装, is_synonym_of
+包装盒, 纸塑铝复合包装, is_synonym_of
+塑料碗盆, 食品保鲜盒, is_synonym_of
+食用油桶, 油桶, is_synonym_of
+门窗玻璃, 窗玻璃, is_same_as
+弃置和过期药品, 过期药品, is_same_as
+油漆及其桶, 废油漆桶, is_same_as
+X光片, x光片, is_same_as
+废胶片, 感光胶片, is_synonym_of
+荧光灯管, 荧光灯, is_same_as
+瓜果皮核, 瓜皮果核, is_same_as
+动物内脏, 内脏, is_synonym_of
+菜梗菜叶, 根茎蔬菜, is_synonym_of
+菜梗菜叶, 蔬菜, is_synonym_of
+中药药渣, 中药渣, is_same_as
+鲜花, 花卉, is_same_as
+猫砂, 猫沙, is_same_as
+污损纸张纸盒, 污损纸张, is_synonym_of
+烟头, 烟蒂, is_same_as
+水果硬壳, 硬果壳, is_same_as
+镜子, 镜, is_same_as
+破损花瓶, 烂花瓶, is_same_as
+
+
