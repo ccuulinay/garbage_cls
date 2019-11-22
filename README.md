@@ -7,6 +7,8 @@ A project to build everything around garbage classification advisor.
     .
     ├── gc_api                  # Backend RESTful APIs, based on Flask.
     ├── simple-citizen          # Frontend interface, based on React.
+    ├── category                # Storing categories of cities and graph related services.
+    ├── chatboxes               # Garbage classification chatbot.
     ├── models                  # Models and models configuration file folder.
     ├── notebooks               # Jupyter notebooks for oneoff actions (images pre-processing, model training, etc).
     └── spiders                 # Data collector for collecting images of garbages.
