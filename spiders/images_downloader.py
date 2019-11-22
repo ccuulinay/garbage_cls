@@ -21,7 +21,11 @@ import logging
 import time
 from pathlib import Path
 
-from category.categories import SH_GARBAGE_CLS_CAT
+from category import categories
+from category import  categories_service
+import importlib
+
+from category.categories import SH_GARBAGE_CLS_CAT, GZ_GARBAGE_CLS_CAT
 from config import google_search_base_url, google_image_tail
 from config import headers
 
@@ -224,6 +228,45 @@ def ops():
             current_num = len(glob.glob(save_path + "/" + save_file_name + "*"))
             f.write("\n")
             f.write(str(current_num))
+
+
+def ops_func():
+    sh_names = categories_service.parse_cls_cats(SH_GARBAGE_CLS_CAT)
+    gz_names = categories_service.parse_cls_cats(GZ_GARBAGE_CLS_CAT)
+
+    _gz_lv = [t[:-1] for t in gz_names if t[-1] == 'SMLP']
+    _sh_lv = [t[:-1] for t in sh_names if t[-1] == 'SMLP']
+
+    for pattern, ops_lv in [("gz", _gz_lv), ("sh", _sh_lv)]:
+        save_path = "./"+pattern+"/temp"
+        except_temp_file = os.path.join(save_path, "./temp_state.ind")
+        
+        if not os.path.exists(save_path):
+            os.mkdir(save_path)
+
+        if os.path.exists(except_temp_file):
+            with open(except_temp_file, "r") as f:
+                lasttime_save_file_name = f.readline()
+                lasttime_download_num = f.readline()
+            if lasttime_save_file_name:
+                last_level = lasttime_save_file_name.replace("\n", "").split("_")
+                last_level_index = ops_lv.index(last_level)
+
+        start_level = 0
+        end_level = len(ops_lv) + 1
+
+        start_image = 0
+        max_end_image = 60
+        if last_level_index:
+            if int(lasttime_download_num) < 59:
+                _proceed_download(ops_lv[last_level_index], lasttime_download_num, max_end_image, except_temp_file, save_path)
+                start_level = last_level_index + 1
+            else:
+                start_level = last_level_index + 1
+
+        for lv in ops_lv[start_level: end_level]:
+            _proceed_download(lv, start_image, max_end_image, except_temp_file, save_path)
+
 
 
 if __name__ == "__main__":
