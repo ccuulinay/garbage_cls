@@ -237,10 +237,13 @@ def ops_func():
     _gz_lv = [t[:-1] for t in gz_names if t[-1] == 'SMLP']
     _sh_lv = [t[:-1] for t in sh_names if t[-1] == 'SMLP']
 
-    for pattern, ops_lv in [("gz", _gz_lv), ("sh", _sh_lv)]:
+    for pattern, ops_lv in [
+        ("gz", _gz_lv)
+        #, ("sh", _sh_lv)
+    ]:
         save_path = "./"+pattern+"/temp"
         except_temp_file = os.path.join(save_path, "./temp_state.ind")
-        
+
         if not os.path.exists(save_path):
             os.mkdir(save_path)
 
