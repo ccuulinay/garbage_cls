@@ -243,10 +243,12 @@ def ops_func():
     ]:
         save_path = "./"+pattern+"/temp"
         except_temp_file = os.path.join(save_path, "./temp_state.ind")
-
+        save_path_obj = Path(save_path)
+        save_path_obj.mkdir(parents=True, exist_ok=True)
+        """
         if not os.path.exists(save_path):
-            os.mkdir(save_path)
-
+            os.mkdir(save_path, parents=True, exist_ok=True)
+        """
         if os.path.exists(except_temp_file):
             with open(except_temp_file, "r") as f:
                 lasttime_save_file_name = f.readline()
@@ -254,6 +256,8 @@ def ops_func():
             if lasttime_save_file_name:
                 last_level = lasttime_save_file_name.replace("\n", "").split("_")
                 last_level_index = ops_lv.index(last_level)
+        else:
+            last_level_index = 0
 
         start_level = 0
         end_level = len(ops_lv) + 1
@@ -271,7 +275,5 @@ def ops_func():
             _proceed_download(lv, start_image, max_end_image, except_temp_file, save_path)
 
 
-
 if __name__ == "__main__":
-    # ops()
-    pass
+    ops_func()
