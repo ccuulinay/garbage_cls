@@ -11,7 +11,7 @@ class Config(object):
     MODEL_FOLDER = os.path.join(APP_ROOT, "..", "models")
     STATIC_FOLDER = os.path.join(APP_ROOT, "static")
     # Load model and it's params in config file which from saving from training.
-    MODEL_CONF_FILE = os.path.join(MODEL_FOLDER, "model_label_dict.conf")
+    MODEL_CONF_FILE = os.path.join(MODEL_FOLDER, "model_label_dict.json")
     with open(MODEL_CONF_FILE, 'r') as f:
         _models_params = json.loads(f.read())
     # MODEL_BASENAME = "_inceptionV3_epoch_30_without_dropout_level0"
