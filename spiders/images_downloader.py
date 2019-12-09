@@ -266,7 +266,7 @@ def ops_func():
         max_end_image = 60
         if last_level_index:
             if int(lasttime_download_num) < 59:
-                _proceed_download(ops_lv[last_level_index], lasttime_download_num, max_end_image, except_temp_file, save_path)
+                _proceed_download(ops_lv[last_level_index], int(lasttime_download_num), max_end_image, except_temp_file, save_path)
                 start_level = last_level_index + 1
             else:
                 start_level = last_level_index + 1
