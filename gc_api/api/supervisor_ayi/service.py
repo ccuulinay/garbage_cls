@@ -3,7 +3,6 @@ import uuid
 import base64
 from flask import abort
 from api import logger, application
-from api.common.constants import MODEL_LABELS_DICT
 from api.garbage_classifier.service import get_predition
 
 
@@ -32,12 +31,12 @@ class SupervisorAyiService(object):
             uploaded_image.save(os.path.join(destination, save_filename))
         return os.path.join(application.config['UPLOAD_FOLDER'], save_filename)
 
-    def predict(self, image_file):
-        return get_predition(image_file)
+    def predict(self, image_file, city):
+        return get_predition(image_file, city)
 
-    def ayi_comment(self, uploaded_image):
+    def ayi_comment(self, uploaded_image, city):
         image_to_comment = self.preprocess(uploaded_image)
-        comment = self.predict(image_to_comment)
+        comment = self.predict(image_to_comment, city)
         logger.debug(comment)
         return image_to_comment, {"comment": comment}
 
