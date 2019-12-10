@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import axios from 'axios';
 import 'react-html5-camera-photo/build/css/index.css';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 import "./H5CameraUpload.css"
+
 import recyclable_logo from '../assets/上海_可回收物_sh.png'; 
 import residual_logo from '../assets/上海_干垃圾_sh.png'; 
 import hazardous_logo from "../assets/上海_有害垃圾_sh.png";
 import househood_food_logo from "../assets/上海_湿垃圾_sh.png";
  
 class H5CameraUpload extends Component {
-    UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/camera_capture';
-    //UPLOAD_ENDPOINT = '/api/v1/ayi/camera_capture';
+    //UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/camera_capture';
+    UPLOAD_ENDPOINT = '/api/v1/ayi/camera_capture';
+
     constructor(props) {
         super(props);
         this.state ={
@@ -20,11 +24,22 @@ class H5CameraUpload extends Component {
           screenshot:"",
           result:"",
           tab: 0,
+          city: "sh",
+          cities: ["sh", "gz"]
         }
         this.onSubmit = this.onSubmit.bind(this)
         this.handleRetake = this.handleRetake.bind(this)
         this.uploadFile = this.uploadFile.bind(this)
         this.handleResult = this.handleResult.bind(this)
+        this._onCitySelect = this._onCitySelect.bind(this)
+    }
+
+    _onCitySelect(e) {
+        //e.preventDefault();
+        console.log(e.value);
+        this.setState({
+            city: e.value
+        });
     }
 
     handleRetake() {
@@ -70,7 +85,7 @@ class H5CameraUpload extends Component {
         const formData = new FormData();
         
         formData.append('image_string', base64Image)
-        
+        formData.append('city', this.state.city)
         return  await axios.post(this.UPLOAD_ENDPOINT, formData,{
             headers: {
                 'content-type': 'multipart/form-data'
@@ -145,7 +160,10 @@ class H5CameraUpload extends Component {
             <div className="preview-container">
             {this.state.flag_previewPhoto ? (
             <div>
-              
+              <div className='nav-control'>
+                <div className="nav-control-tips">Please select city you are in: </div>
+                <Dropdown options={this.state.cities} onChange={this._onCitySelect} value={this.state.cities[0]} placeholder="Select a city" />
+              </div>
               <div className='screenshots'>
                 {
                 this.state.screenshot 
@@ -156,6 +174,7 @@ class H5CameraUpload extends Component {
               <div className='controls'>
                   <button onClick={this.handleRetake}>retake</button>
                   <button onClick={this.onSubmit}>upload</button>
+                  
               </div>
               <div><div>
               
