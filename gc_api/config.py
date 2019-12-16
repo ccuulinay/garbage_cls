@@ -8,8 +8,8 @@ class Config(object):
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))
     SECRET_KEY = os.getenv('SECRET_KEY', 'ccuulinay')
     CITIES_AND_MODEL_NAME = os.getenv('CITIES_AND_MODEL_NAME'
-                                      , """sh,_mobilenetV2_epoch_30_without_dropout_level0;
-                                      gz,_gz_mobilenetV2_epoch10_dropout05_level0""")
+                                      , """sh,_mobilenetV2_epoch_30_without_dropout_level0
+                                      """)
     UPLOAD_FOLDER = os.path.join(APP_ROOT, "images")
     MODEL_FOLDER = os.path.join(APP_ROOT, "..", "models")
     STATIC_FOLDER = os.path.join(APP_ROOT, "static")
