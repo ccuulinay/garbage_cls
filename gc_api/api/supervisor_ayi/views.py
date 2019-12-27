@@ -32,6 +32,7 @@ class SupervisorAyiOperations(Resource):
             return {'Message': "No file selected"}
         if not validate_city(city):
             return {'Message': "Input city is not supported so far."}
+            # city = str(ALLOWED_CITIES[0]).lower()
         else:
             city = str(city).lower()
         if uploaded and self.validate_imagefile(uploaded.filename):
@@ -64,7 +65,7 @@ class SupervisorAyiOperations(Resource):
         city = args['city']
         # Validate city param, if not in allowed list, set as default, Shanghai.
         if not validate_city(city):
-            city = "sh"
+            city = str(list(ALLOWED_CITIES)[0]).lower()
         else:
             city = str(city).lower()
         temp_image, response = supervisor_ayi_service.ayi_comment(uploaded_image_string, city)

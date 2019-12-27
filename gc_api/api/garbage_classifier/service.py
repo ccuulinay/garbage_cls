@@ -41,7 +41,7 @@ def load_model(city_models=MODELS):
     logger.info("--- Model loaded in %s seconds ---" % (time.time() - start_time))
 
 
-def get_predition(image, city='sh'):
+def get_predition(image, city='general'):
     if "garbage_cls" not in globals():
         load_model()
     image_X = preprocess_imagefile(image, city)
