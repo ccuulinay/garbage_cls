@@ -1,21 +1,25 @@
 {
   "files": {
     "main.css": "/static/css/main.110192e7.chunk.css",
-    "main.js": "/static/js/main.2824e53a.chunk.js",
-    "main.js.map": "/static/js/main.2824e53a.chunk.js.map",
+    "main.js": "/static/js/main.a6a9b577.chunk.js",
+    "main.js.map": "/static/js/main.a6a9b577.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.2e7eae06.js",
     "runtime-main.js.map": "/static/js/runtime-main.2e7eae06.js.map",
     "static/css/2.37dbf0ad.chunk.css": "/static/css/2.37dbf0ad.chunk.css",
-    "static/js/2.921f1a7d.chunk.js": "/static/js/2.921f1a7d.chunk.js",
-    "static/js/2.921f1a7d.chunk.js.map": "/static/js/2.921f1a7d.chunk.js.map",
+    "static/js/2.46ce41cd.chunk.js": "/static/js/2.46ce41cd.chunk.js",
+    "static/js/2.46ce41cd.chunk.js.map": "/static/js/2.46ce41cd.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.55d64a7db0f67bce6db2e0376e55399f.js": "/precache-manifest.55d64a7db0f67bce6db2e0376e55399f.js",
+    "precache-manifest.f66228ec12122ae0ed089c9a696fe514.js": "/precache-manifest.f66228ec12122ae0ed089c9a696fe514.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.37dbf0ad.chunk.css.map": "/static/css/2.37dbf0ad.chunk.css.map",
     "static/css/main.110192e7.chunk.css.map": "/static/css/main.110192e7.chunk.css.map",
     "static/media/上海_可回收物_sh.png": "/static/media/上海_可回收物_sh.94658c33.png",
     "static/media/上海_干垃圾_sh.png": "/static/media/上海_干垃圾_sh.398eb4a3.png",
     "static/media/上海_有害垃圾_sh.png": "/static/media/上海_有害垃圾_sh.698541bb.png",
-    "static/media/上海_湿垃圾_sh.png": "/static/media/上海_湿垃圾_sh.4bb2a660.png"
+    "static/media/上海_湿垃圾_sh.png": "/static/media/上海_湿垃圾_sh.4bb2a660.png",
+    "static/media/其他.jpg": "/static/media/其他.a0cd6ea2.jpg",
+    "static/media/厨余.jpg": "/static/media/厨余.986390c5.jpg",
+    "static/media/可回收.jpg": "/static/media/可回收.a300c01e.jpg",
+    "static/media/有害.jpg": "/static/media/有害.83e3c360.jpg"
   }
 }

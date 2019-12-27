@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d828fedf59b43406c3b13ede8094670f",
+    "revision": "a36c798ac47e46a833406f86c128c03f",
     "url": "/index.html"
   },
   {
-    "revision": "6ab368245ff1ae1d2cfa",
+    "revision": "d177ca6659159896209c",
     "url": "/static/css/2.37dbf0ad.chunk.css"
   },
   {
-    "revision": "193133e3c4409b220fa6",
+    "revision": "f3194226febeec877ba4",
     "url": "/static/css/main.110192e7.chunk.css"
   },
   {
-    "revision": "6ab368245ff1ae1d2cfa",
-    "url": "/static/js/2.921f1a7d.chunk.js"
+    "revision": "d177ca6659159896209c",
+    "url": "/static/js/2.46ce41cd.chunk.js"
   },
   {
-    "revision": "193133e3c4409b220fa6",
-    "url": "/static/js/main.2824e53a.chunk.js"
+    "revision": "f3194226febeec877ba4",
+    "url": "/static/js/main.a6a9b577.chunk.js"
   },
   {
     "revision": "ea03d3ddf5ada1019748",
@@ -38,5 +38,21 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "4bb2a660988741bd433c743ecaf3f6e4",
     "url": "/static/media/上海_湿垃圾_sh.4bb2a660.png"
+  },
+  {
+    "revision": "a0cd6ea2efa900e86b3c53250ea3c811",
+    "url": "/static/media/其他.a0cd6ea2.jpg"
+  },
+  {
+    "revision": "986390c566b34a07f6fb53720c717210",
+    "url": "/static/media/厨余.986390c5.jpg"
+  },
+  {
+    "revision": "a300c01eafbf992c3d9e4196aea3ada6",
+    "url": "/static/media/可回收.a300c01e.jpg"
+  },
+  {
+    "revision": "83e3c36044ab848423c999f6c6106400",
+    "url": "/static/media/有害.83e3c360.jpg"
   }
 ]);
