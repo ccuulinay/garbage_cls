@@ -6,10 +6,15 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import "./H5CameraUpload.css"
 
-import recyclable_logo from '../assets/上海_可回收物_sh.png'; 
-import residual_logo from '../assets/上海_干垃圾_sh.png'; 
-import hazardous_logo from "../assets/上海_有害垃圾_sh.png";
-import househood_food_logo from "../assets/上海_湿垃圾_sh.png";
+import sh_recyclable_logo from '../assets/上海_可回收物_sh.png'; 
+import sh_residual_logo from '../assets/上海_干垃圾_sh.png'; 
+import sh_hazardous_logo from "../assets/上海_有害垃圾_sh.png";
+import sh_househood_food_logo from "../assets/上海_湿垃圾_sh.png";
+
+import gen_recyclable_logo from "../assets/可回收.jpg";
+import gen_residual_logo from '../assets/其他.jpg'; 
+import gen_hazardous_logo from "../assets/有害.jpg";
+import gen_food_logo from "../assets/厨余.jpg";
  
 class H5CameraUpload extends Component {
     //UPLOAD_ENDPOINT = 'http://127.0.0.1:40086/api/v1/ayi/camera_capture';
@@ -49,18 +54,35 @@ class H5CameraUpload extends Component {
     }
 
     handleResult() {
+        let cur_city = this.state.city
         let cur_state = this.state.result
-        if (cur_state === "可回收物") {
-            return <img src={recyclable_logo} alt="result"/>
-        }else if (cur_state === "干垃圾") {
-            return <img src={residual_logo} alt="result"/>
-        }else if (cur_state === "有害垃圾") {
-            return <img src={hazardous_logo} alt="result"/>
-        }else if (cur_state === "湿垃圾") {
-            return <img src={househood_food_logo} alt="result"/>
-        }else if (cur_state === "人像") {
-            return <p>你是什么垃圾？！</p>
+        if (cur_city === "sh"){
+            if (cur_state === "可回收物") {
+                return <img src={sh_recyclable_logo} alt="result"/>
+            }else if (cur_state === "干垃圾" || cur_state === "其他垃圾"){
+                return <img src={sh_residual_logo} alt="result"/>
+            }else if (cur_state === "有害垃圾") {
+                return <img src={sh_hazardous_logo} alt="result"/>
+            }else if (cur_state === "湿垃圾" || cur_state === "厨余垃圾") {
+                return <img src={sh_househood_food_logo} alt="result"/>
+            }else if (cur_state === "人像") {
+                return <p>你是什么垃圾？！</p>
+            }
         }
+        else {
+            if (cur_state === "可回收物") {
+                return <img src={gen_recyclable_logo} alt="result"/>
+            }else if (cur_state === "其他垃圾") {
+                return <img src={gen_residual_logo} alt="result"/>
+            }else if (cur_state === "有害垃圾") {
+                return <img src={gen_hazardous_logo} alt="result"/>
+            }else if (cur_state === "厨余垃圾") {
+                return <img src={gen_food_logo} alt="result"/>
+            }else if (cur_state === "人像") {
+                return <p>你是什么垃圾？！</p>
+            }
+        }
+        
     }
 
     async onSubmit(e){
