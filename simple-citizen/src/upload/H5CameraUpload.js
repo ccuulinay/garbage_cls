@@ -72,11 +72,11 @@ class H5CameraUpload extends Component {
         else {
             if (cur_state === "可回收物") {
                 return <img src={gen_recyclable_logo} alt="result"/>
-            }else if (cur_state === "其他垃圾") {
+            }else if (cur_state === "干垃圾" || cur_state === "其他垃圾") {
                 return <img src={gen_residual_logo} alt="result"/>
             }else if (cur_state === "有害垃圾") {
                 return <img src={gen_hazardous_logo} alt="result"/>
-            }else if (cur_state === "厨余垃圾") {
+            }else if (cur_state === "湿垃圾" || cur_state === "厨余垃圾") {
                 return <img src={gen_food_logo} alt="result"/>
             }else if (cur_state === "人像") {
                 return <p>你是什么垃圾？！</p>
